@@ -29,7 +29,7 @@ public class CheckoutTest extends Hooks {
         checkoutPage.enterFirstName();
         checkoutPage.enterLastName();
         checkoutPage.enterAddress();
-        checkoutPage.getPaymentInfomation();
+        checkoutPage.getPaymentInformation();
         checkoutPage.clickContinueCheckoutButton();
         checkoutPage.clickCompleteYourOrderButton();
         assertEquals("Thank you for your order!", checkoutPage.getPageTitle().getText());
@@ -44,7 +44,7 @@ public class CheckoutTest extends Hooks {
         checkoutPage.clickCheckoutButton();
         checkoutPage.enterLastName();
         checkoutPage.enterAddress();
-        checkoutPage.getPaymentInfomation();
+        checkoutPage.getPaymentInformation();
         checkoutPage.clickContinueCheckoutButton();
         checkoutPage.clickCompleteYourOrderButton();
         assertEquals(checkoutPage.getFieldError().getText(), "First Name is required");
@@ -58,7 +58,7 @@ public class CheckoutTest extends Hooks {
         checkoutPage.clickCheckoutButton();
         checkoutPage.enterFirstName();
         checkoutPage.enterAddress();
-        checkoutPage.getPaymentInfomation();
+        checkoutPage.getPaymentInformation();
         checkoutPage.clickContinueCheckoutButton();
         checkoutPage.clickCompleteYourOrderButton();
         assertEquals(checkoutPage.getFieldError().getText(), "Last Name is required");
@@ -72,7 +72,7 @@ public class CheckoutTest extends Hooks {
         checkoutPage.clickCheckoutButton();
         checkoutPage.enterFirstName();
         checkoutPage.enterLastName();
-        checkoutPage.getPaymentInfomation();
+        checkoutPage.getPaymentInformation();
         checkoutPage.clickContinueCheckoutButton();
         checkoutPage.clickCompleteYourOrderButton();
         assertEquals(checkoutPage.getFieldError().getText(), "Address is required");
@@ -105,11 +105,31 @@ public class CheckoutTest extends Hooks {
         assertEquals(checkoutPage.totalPrice(), expectedTotal);
     }
 
-    @Test(description = "The test verifies the visibility of the products if the user adds two products in the cart")
-    public void addingTwoDifferentProductsInTheBasket() {
+
+    @Test(description = "Calculating the price for two different products")
+    public void totalPriceCalculationTestForTwoDifferentProducts() throws InterruptedException {
+        checkoutPage.clickAwesomeSoftShirtProduct();
+        checkoutPage.clickAddProductToCartButton();
+        checkoutPage.clickHomePageButton();
+        checkoutPage.clickIncredibleConcreteHatProduct();
+        checkoutPage.clickAddProductToCartButton();
+        checkoutPage.clickShoppingCartIcon();
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The price of the first product is : " + checkoutPage.shirtPrice());
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The price of the second product is : " + checkoutPage.hatPrice());
+        double expectedTotal = checkoutPage.shirtPrice() + checkoutPage.hatPrice();
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The expected total should be : " + expectedTotal);
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The actual total is : " + checkoutPage.totalPrice1());
+        assertEquals(checkoutPage.totalPrice1(), expectedTotal);
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The price of the shirt is not seen by the page, only the hat price is calculated");
 
     }
 
-
-
+    @Test(description = "Testing 'the minus quantity button' functionality")
+    public void minusQuantityTest() {
+        checkoutPage.clickAwesomeSoftShirtProduct();
+        checkoutPage.clickAddProductToCartButton();
+        checkoutPage.clickShoppingCartIcon();
+        checkoutPage.clickMinusQuantityButton();
+        assertEquals("How about adding some products in your cart?", checkoutPage.getTextContainer().getText());
+    }
 }

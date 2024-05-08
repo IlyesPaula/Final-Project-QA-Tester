@@ -35,13 +35,40 @@ public class LoginTest extends Hooks {
         assertEquals(loginPage.getLoginError().getText(), "Please fill in the username!");
     }
 
-    @Test(description = "Testing the login functionality with a wrong username")
+    @Test(description = "Testing the login functionality without password")
     public void negativeLoginTest02() throws InterruptedException {
+        loginPage.clickSignInButton();
+        loginPage.enterYourUserName();
+        loginPage.clickLoginButton();
+        assertEquals(loginPage.getLoginError().getText(), "Please fill in the password!");
+    }
+
+    @Test(description = "Testing the login functionality with a wrong username")
+    public void negativeLoginTest03() throws InterruptedException {
         loginPage.clickSignInButton();
         loginPage.enterYourUserName2("Lorena");
         loginPage.enterYourPassword("choochoo");
         loginPage.clickLoginButton();
-        assertEquals(loginPage.getLoginError().getText(),"Incorrect username or password!");
+        assertEquals(loginPage.getLoginError().getText(), "Incorrect username or password!");
+    }
+    @Test(description = "Testing the login functionality with a wrong password")
+    public void negativeLoginTest04() throws InterruptedException {
+        loginPage.clickSignInButton();
+        loginPage.enterYourUserName();
+        loginPage.enterYourPassword("chocho");
+        loginPage.clickLoginButton();
+        assertEquals(loginPage.getLoginError().getText(), "Incorrect username or password!");
+    }
+
+
+    @Test(description = "Testing the functionality of disconnecting from the account")
+    public void logoutTest() throws InterruptedException {
+        loginPage.clickSignInButton();
+        loginPage.enterYourUserName();
+        loginPage.enterYourPassword("choochoo");
+        loginPage.clickLoginButton();
+        loginPage.clickSignInButton();
+        assertEquals(loginPage.getLogoutAffirmation().getText(), "Hello guest! ");
     }
 
 

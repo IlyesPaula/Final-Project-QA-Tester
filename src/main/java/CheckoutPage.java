@@ -87,7 +87,7 @@ public class CheckoutPage extends BasePage {
     @FindBy(css = ".form-check")
     private WebElement paymentInformation;
 
-    public void getPaymentInfomation() {
+    public void getPaymentInformation() {
         paymentInformation.click();
     }
 
@@ -126,11 +126,14 @@ public class CheckoutPage extends BasePage {
         String cleanAmountValue = amountValue.replace("$", "");
         return Double.parseDouble(cleanAmountValue);
     }
+
+
     public double taxPrice() {
         String taxValue = taxPrice.getText();
         String cleanTaxValue = taxValue.replace("$", "");
         return Double.parseDouble(cleanTaxValue);
     }
+
     public double totalPrice() {
         String totalValue = totalPrice.getText();
         String cleanTotalValue = totalValue.replace("$", "");
@@ -144,11 +147,72 @@ public class CheckoutPage extends BasePage {
         plusQuantity.click();
     }
 
+    @FindBy(linkText = "Awesome Soft Shirt")
+    private WebElement awesomeSoftShirtProduct;
+
+    public void clickAwesomeSoftShirtProduct() {
+        awesomeSoftShirtProduct.click();
+    }
+
+    @FindBy(linkText = "Incredible Concrete Hat")
+    private WebElement incredibleConcreteHatProduct;
+
+    public void clickIncredibleConcreteHatProduct() {
+        incredibleConcreteHatProduct.click();
+    }
+
+    @FindBy(css = ".svg-inline--fa.fa-shopping-bag.fa-w-14.fa-3x.brand-logo")
+    private WebElement homePageButton;
+
+    public void clickHomePageButton() {
+        homePageButton.click();
+    }
+
+
+    @FindBy(xpath = "(//td[@class='amount'])[1]")
+    private WebElement shirtProduct;
+
+    @FindBy(xpath = "(//td[@class='amount'])[1]")
+    private WebElement hatProduct;
+
+    @FindBy(xpath = "(//td[@class='amount'])[3]")
+    private WebElement totalPrice1;
+
+    public double shirtPrice() {
+        String amountValue = shirtProduct.getText();
+        String cleanAmountValue = amountValue.replace("$", "");
+        return Double.parseDouble(cleanAmountValue);
+    }
+
+    public double hatPrice() {
+        String amountValue = hatProduct.getText();
+        String cleanAmountValue = amountValue.replace("$", "");
+        return Double.parseDouble(cleanAmountValue);
+    }
+
+    public double totalPrice1() {
+        String totalValue = totalPrice1.getText();
+        String cleanTotalValue = totalValue.replace("$", "");
+        return Double.parseDouble(cleanTotalValue);
+    }
+
+    @FindBy(css = ".svg-inline--fa.fa-minus-circle.fa-w-16 ")
+    private WebElement minusQuantity;
+
+    public void clickMinusQuantityButton() {
+        minusQuantity.click();
+    }
+
+    @FindBy(css=".text-center.container")
+    private WebElement textContainer;
+
+    public WebElement getTextContainer(){
+        return textContainer;
+    }
+
 
     public void selectOption(WebElement element, String option) {
         Select optionSelect = new Select(element);
         optionSelect.selectByVisibleText(option);
     }
-
-
 }

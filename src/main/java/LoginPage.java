@@ -17,7 +17,7 @@ public class LoginPage extends BasePage {
     private WebElement signInButton;
 
     public void clickSignInButton() {
-       signInButton.click();
+        signInButton.click();
     }
 
     @FindBy(id = "user-name")
@@ -35,6 +35,7 @@ public class LoginPage extends BasePage {
     public void enterYourUserName2(String pass) {
         userNameField.sendKeys(pass);
     }
+
     @FindBy(id = "password")
     private WebElement passwordField;
 
@@ -49,19 +50,28 @@ public class LoginPage extends BasePage {
     public void clickLoginButton() {
         clickLoginButton.click();
     }
-    @FindBy (linkText = "dino")
+
+    @FindBy(linkText = "dino")
     private WebElement correctName;
 
     public WebElement getCorrectName() {
         return correctName;
     }
 
-    @FindBy (css = ".error")
+    @FindBy(css = ".error")
     private WebElement loginError;
 
     public WebElement getLoginError() {
         return loginError;
     }
+
+@FindBy (linkText = "Hello guest! ")
+    private WebElement logoutAffirmation;
+
+    public WebElement getLogoutAffirmation() {
+        return logoutAffirmation;
+    }
+
 
 
 
