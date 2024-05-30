@@ -23,6 +23,7 @@ public class CheckoutPage extends BasePage {
         productMetalChair.click();
     }
 
+
     @FindBy(css = ".svg-inline--fa.fa-cart-plus.fa-w-18.fa-3x")
     private WebElement addProductToCartButton;
 
@@ -154,6 +155,10 @@ public class CheckoutPage extends BasePage {
         awesomeSoftShirtProduct.click();
     }
 
+    public WebElement getAwesomeSoftShirtProduct() {
+        return awesomeSoftShirtProduct;
+    }
+
     @FindBy(linkText = "Incredible Concrete Hat")
     private WebElement incredibleConcreteHatProduct;
 
@@ -203,16 +208,60 @@ public class CheckoutPage extends BasePage {
         minusQuantity.click();
     }
 
-    @FindBy(css=".text-center.container")
+    @FindBy(css = ".svg-inline--fa.fa-trash.fa-w-14 ")
+    private WebElement trashBinButton;
+
+    public void clickTrashBinButton() {
+        trashBinButton.click();
+    }
+
+    @FindBy(css = ".text-center.container")
     private WebElement textContainer;
 
-    public WebElement getTextContainer(){
+    public WebElement getTextContainer() {
         return textContainer;
     }
 
 
-    public void selectOption(WebElement element, String option) {
-        Select optionSelect = new Select(element);
-        optionSelect.selectByVisibleText(option);
+    @FindBy(css = ".svg-inline--fa.fa-heart.fa-w-16.fa-3x ")
+    private WebElement heartIcon;
+
+    public void clickHeartIcon() {
+        heartIcon.click();
+    }
+
+    @FindBy(css = ".svg-inline--fa.fa-heart.fa-w-16 ")
+    private WebElement wishlistIcon;
+
+    public void clickWishlistIcon() {
+        wishlistIcon.click();
+    }
+
+    @FindBy(css = ".text-muted")
+    private WebElement wishlistTitle;
+
+    public WebElement getWishlistTitle() {
+        return wishlistTitle;
+    }
+
+    @FindBy(css = ".svg-inline--fa.fa-heart-broken.fa-w-16.fa-2x ")
+    private WebElement heartButton;
+
+    public void clickHeartButton() {
+        heartButton.click();
+    }
+
+
+    @FindBy(css=".fa-layers-counter.shopping_cart_badge")
+    private WebElement wishlistCounterBadge;
+
+    public WebElement getWishlistCounterBadge(){
+        return wishlistCounterBadge;
+    }
+    @FindBy(css = ".svg-inline--fa.fa-undo.fa-w-16 ")
+    private WebElement refreshPageButton;
+
+    public void clickRefreshPageButton() {
+        refreshPageButton.click();
     }
 }

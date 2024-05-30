@@ -124,7 +124,7 @@ public class CheckoutTest extends Hooks {
 
     }
 
-    @Test(description = "Testing 'the minus quantity button' functionality")
+    @Test(description = "Testing the functionality of 'the minus button' for reducing the quantity of the products in the cart")
     public void minusQuantityTest() {
         checkoutPage.clickAwesomeSoftShirtProduct();
         checkoutPage.clickAddProductToCartButton();
@@ -132,4 +132,60 @@ public class CheckoutTest extends Hooks {
         checkoutPage.clickMinusQuantityButton();
         assertEquals("How about adding some products in your cart?", checkoutPage.getTextContainer().getText());
     }
+
+    @Test(description = "Testing the functionality of 'the trash bin button' for deleting a the product that was add in the cart")
+    public void trashBinButtonTest() {
+        checkoutPage.clickIncredibleConcreteHatProduct();
+        checkoutPage.clickAddProductToCartButton();
+        checkoutPage.clickShoppingCartIcon();
+        checkoutPage.clickTrashBinButton();
+        assertEquals("How about adding some products in your cart?", checkoutPage.getTextContainer().getText());
+    }
+
+    @Test(description = "Testing to see if the user is able to add products to the wishlist")
+    public void wishlistTest() throws InterruptedException {
+        checkoutPage.clickProductMetalChair();
+        checkoutPage.clickHeartIcon();
+        checkoutPage.clickHomePageButton();
+        checkoutPage.clickAwesomeSoftShirtProduct();
+        checkoutPage.clickHeartIcon();
+        checkoutPage.clickHomePageButton();
+        checkoutPage.clickIncredibleConcreteHatProduct();
+        checkoutPage.clickHeartIcon();
+        checkoutPage.clickWishlistIcon();
+        assertEquals(checkoutPage.getWishlistTitle().getText(),  "Wishlist");
+    }
+
+    @Test(description = "Testing to see if the user is able to delete a product from the wishlist")
+    public void deleteProductFromWishlist() throws InterruptedException {
+        checkoutPage.clickProductMetalChair();
+        checkoutPage.clickHeartIcon();
+        checkoutPage.clickHomePageButton();
+        checkoutPage.clickAwesomeSoftShirtProduct();
+        checkoutPage.clickHeartIcon();
+        checkoutPage.clickWishlistIcon();
+        checkoutPage.clickHeartButton();
+        assertEquals(checkoutPage.getAwesomeSoftShirtProduct().getText(), "Awesome Soft Shirt");
+    }
+
+    @Test(description = "Adding one product in wishlist and refreshing the page to see if the product is still in the wishlist")
+    public void refreshPageWithOneProductInWishlist(){
+        checkoutPage.clickProductMetalChair();
+        checkoutPage.clickHeartIcon();
+        checkoutPage.clickRefreshPageButton();
+        assertEquals(checkoutPage.getWishlistCounterBadge().getText(),"1");
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the product disappear from the wishlist");
+    }
+
+    @Test(description = "Adding one product to cart and refreshing the page to see if the product is still in the cart")
+    public void addingOneProductToCartAndRefreshingThePage(){
+        checkoutPage.clickProductMetalChair();
+        checkoutPage.clickAddProductToCartButton();
+        checkoutPage.clickShoppingCartIcon();
+        checkoutPage.clickRefreshPageButton();
+        assertEquals("How about adding some products in your cart?", checkoutPage.getTextContainer().getText());
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the product disappear from the cart saying : 'How about adding some products in your cart?' ");
+    }
+
+
 }

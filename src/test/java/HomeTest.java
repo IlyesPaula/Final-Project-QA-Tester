@@ -1,4 +1,7 @@
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -20,38 +23,136 @@ public class HomeTest extends Hooks {
         wait = new WebDriverWait(driver, 30);
     }
 
-    @Test(description = "Testing the search box functionality")
-    public void homeTest() throws InterruptedException {
-        homePage.clickSearchBox();
-        homePage.enterObjectToSearch();
-        homePage.clickSearchButton();
-       assertEquals("Awesome Metal Chair", homePage.getProductName().getText());
+    @Test(description = "Testing the 'HomePage button' functionality")
+    public void homePageButton() {
+        homePage.clickAwesomeSoftShirtProduct();
+        homePage.clickAddProductToCartButton();
+        homePage.clickShoppingCartIcon();
+        homePage.clickHomePageButton();
+        assertEquals(homePage.getHomePageTitle().getText(), "Products");
     }
+    @Test(description = "Testing the 'Help button' functionality")
+    public void helpButonTest() throws InterruptedException {
+        homePage.clickHelpButton();
+        wait.until(ExpectedConditions.visibilityOf(homePage.getHelpTitle()));
+        assertEquals(homePage.getHelpTitle().getText(), "Help");
+    }
+
+    @Test(description = "Testing the 'search box' functionality with the full name of one product")
+    public void searchBoxTest() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Awesome Metal Chair");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getAwesomeMetalChairProduct().getText(), "Awesome Metal Chair");
+    }
+
+    @Test(description = "Testing the 'search box' functionality with partial text from one product")
+    public void partialSearchBoxTest() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Chips");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getAwesomeGraniteChipsProduct().getText(), "Awesome Granite Chips");
+    }
+
+    @Test(description = "Adding one product to cart and refresh the page to see if the shopping cart counter badge is still having the product the user add")
+    public void refreshPageButtonTest() throws InterruptedException {
+        homePage.clickAwesomeSoftShirtProduct();
+        homePage.clickAddProductToCartButton();
+        homePage.clickRefreshPageButton();
+        assertEquals(homePage.getShoppingCartCounterBadge().getText(), "1");
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the counter badge is not having the product that has been add");
+    }
+
 
     @Test(description = "This test verifies the sorting box functionality from A to Z produce")
     public void checkSortingProductsFromAtoZ() throws InterruptedException {
         homePage.selectOption(homePage.gertSortProductsDropDown(), "Sort by name (A to Z)");
-        assertEquals("Sort by name (A to Z)", homePage.getOptionAtoZ().getText());
+        assertEquals(homePage.getOptionAtoZ().getText(), "Sort by name (A to Z)");
     }
-
 
     @Test(description = "This test verifies the sorting box functionality from Z to A produce")
     public void checkSortingProductsFromZtoA() throws InterruptedException {
         homePage.selectOption(homePage.gertSortProductsDropDown(), "Sort by name (Z to A)");
-        assertEquals("Sort by name (Z to A)", homePage.getOptionZtoA().getText());
+        assertEquals(homePage.getOptionZtoA().getText(), "Sort by name (Z to A)");
     }
-
 
     @Test(description = "This test verifies the sorting box functionality from Low to High price")
     public void checkSortingProductsFromLowToHigh() throws InterruptedException {
         homePage.selectOption(homePage.gertSortProductsDropDown(), "Sort by price (low to high)");
-        assertEquals("Sort by price (low to high)", homePage.getOptionLowToHigh().getText());
+        assertEquals(homePage.getOptionLowToHigh().getText(), "Sort by price (low to high)");
     }
 
     @Test(description = "This test verifies the sorting box functionality from High to Low price")
     public void checkSortingProductsFromHighToLow() throws InterruptedException {
         homePage.selectOption(homePage.gertSortProductsDropDown(), "Sort by price (high to low)");
-        assertEquals("Sort by price (high to low)", homePage.getOptionHighToLow().getText());
+        assertEquals(homePage.getOptionHighToLow().getText(), "Sort by price (high to low)");
+    }
+
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest2() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Awesome Soft Shirt");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getAwesomeSoftShirtProduct().getText(), "Awesome Soft Shirt");
+    }
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest3() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Awesome Granit Chips");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getAwesomeGraniteChipsProduct().getText(), "Awesome Granit Chips");
+    }
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest4() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Gorgeous Soft Pizza");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getGorgeousSoftPizzaProduct().getText(), "Gorgeous Soft Pizza");
+    }
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest5() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Incredible Concrete Hat");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getIncredibleConcreteHatProduct().getText(), "Incredible Concrete Hat");
+    }
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest6() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Licensed Steel Gloves");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getLicensedSteelGlovesProduct().getText(), "Licensed Steel Gloves");
+    }
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest7() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Practical Metal Mouse");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getPracticalMetalMouseProduct().getText(), "Practical Metal Mouse");
+    }
+
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest8() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Practical Wooden Bacon");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getPracticalWoodenBacon().getText(), "Practical Wooden Bacon");
+    }
+
+
+    @Test(description = "Testing the 'search box' functionality")
+    public void searchBoxTest9() throws InterruptedException {
+        homePage.clickSearchBox();
+        homePage.enterObjectToSearch("Refined Frozen Mouse");
+        homePage.clickSearchButton();
+        assertEquals(homePage.getRefinedFrozenMouseProduct().getText(), "Refined Frozen Mouse");
     }
 
 }

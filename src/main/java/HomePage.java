@@ -24,8 +24,8 @@ public class HomePage extends BasePage {
     @FindBy(id = "input-search")
     private WebElement inputSearch;
 
-    public void enterObjectToSearch() {
-        inputSearch.sendKeys("Awesome Metal Chair");
+    public void enterObjectToSearch(String pass) {
+        inputSearch.sendKeys(pass);
     }
 
     @FindBy(css = ".btn.btn-light.btn-sm")
@@ -36,12 +36,102 @@ public class HomePage extends BasePage {
     }
 
     @FindBy(linkText = "Awesome Metal Chair")
-    private WebElement productName;
+    private WebElement awesomeMetalChairProduct;
 
-    public WebElement getProductName(){
-        return productName;
+    public WebElement getAwesomeMetalChairProduct() {
+        return awesomeMetalChairProduct;
     }
 
+    @FindBy(linkText = "Awesome Granite Chips")
+    private WebElement awesomeGraniteChipsProduct;
+
+    public WebElement getAwesomeGraniteChipsProduct() {
+        return awesomeGraniteChipsProduct;
+    }
+
+    @FindBy(linkText = "Awesome Soft Shirt")
+    private WebElement awesomeSoftShirtProduct;
+
+    public void clickAwesomeSoftShirtProduct() {
+        awesomeSoftShirtProduct.click();
+    }
+
+    public WebElement getAwesomeSoftShirtProduct() {
+        return awesomeSoftShirtProduct;
+    }
+
+
+    @FindBy(css = ".svg-inline--fa.fa-cart-plus.fa-w-18.fa-3x")
+    private WebElement addProductToCartButton;
+
+    public void clickAddProductToCartButton() {
+        addProductToCartButton.click();
+    }
+
+    @FindBy(css = ".shopping-cart-icon.fa-layers.fa-fw")
+    private WebElement shoppingCartIcon;
+
+    public void clickShoppingCartIcon() {
+        shoppingCartIcon.click();
+    }
+
+    @FindBy(css = ".svg-inline--fa.fa-shopping-bag.fa-w-14.fa-3x.brand-logo")
+    private WebElement homePageButton;
+
+    public void clickHomePageButton() {
+        homePageButton.click();
+    }
+
+    @FindBy(css = ".subheader-container")
+    private WebElement homePageTitle;
+
+    public WebElement getHomePageTitle() {
+        return homePageTitle;
+    }
+
+
+    @FindBy(linkText = "Gorgeous Soft Pizza")
+    private WebElement gorgeousSoftPizzaProduct;
+
+    public WebElement getGorgeousSoftPizzaProduct() {
+        return gorgeousSoftPizzaProduct;
+    }
+
+    @FindBy(linkText = "Incredible Concrete Hat")
+    private WebElement incredibleConcreteHatProduct;
+
+    public WebElement getIncredibleConcreteHatProduct() {
+        return incredibleConcreteHatProduct;
+    }
+
+    @FindBy(linkText = "Licensed Steel Gloves")
+    private WebElement licensedSteelGlovesProduct;
+
+    public WebElement getLicensedSteelGlovesProduct() {
+        return licensedSteelGlovesProduct;
+    }
+
+    @FindBy(linkText = "Practical Metal Mouse")
+    private WebElement practicalMetalMouseProduct;
+
+    public WebElement getPracticalMetalMouseProduct() {
+        return practicalMetalMouseProduct;
+    }
+
+    @FindBy(linkText = "Practical Wooden Bacon")
+    private WebElement practicalWoodenBaconProduct;
+
+    public WebElement getPracticalWoodenBacon() {
+        return practicalWoodenBaconProduct;
+    }
+
+
+    @FindBy(linkText = "Refined Frozen Mouse")
+    private WebElement refinedFrozenMouseProduct;
+
+    public WebElement getRefinedFrozenMouseProduct() {
+        return refinedFrozenMouseProduct;
+    }
 
     @FindBy(css = ".sort-products-select.form-control.form-control-sm")
     private WebElement sortProductsDropDown;
@@ -78,6 +168,34 @@ public class HomePage extends BasePage {
         return optionHighToLow;
     }
 
+    @FindBy(css = ".svg-inline--fa.fa-question.fa-w-12 ")
+    private WebElement helpButton;
+
+    public void clickHelpButton() {
+        helpButton.click();
+    }
+
+    @FindBy(css = ".modal-title.h4")
+    private WebElement helpTitle;
+
+    public WebElement getHelpTitle() {
+        return helpTitle;
+    }
+
+
+    @FindBy(css = ".svg-inline--fa.fa-undo.fa-w-16 ")
+    private WebElement refreshPageButton;
+
+    public void clickRefreshPageButton() {
+        refreshPageButton.click();
+    }
+
+    @FindBy(css=".fa-layers-counter.shopping_cart_badge")
+    private WebElement shoppingCartCounterBadge;
+
+    public WebElement getShoppingCartCounterBadge(){
+        return shoppingCartCounterBadge;
+    }
 
     public void selectOption(WebElement element, String option) {
         Select optionSelect = new Select(element);

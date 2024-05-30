@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,21 +21,15 @@ public class LoginPage extends BasePage {
         signInButton.click();
     }
 
+
     @FindBy(id = "user-name")
     private WebElement userNameField;
 
 
-    public void enterYourUserName() {
-        userNameField.sendKeys("dino");
-    }
-
-    @FindBy(id = "user-name")
-    private WebElement userNameField2;
-
-
-    public void enterYourUserName2(String pass) {
+    public void enterYourUserName(String pass) {
         userNameField.sendKeys(pass);
     }
+
 
     @FindBy(id = "password")
     private WebElement passwordField;
@@ -51,6 +46,13 @@ public class LoginPage extends BasePage {
         clickLoginButton.click();
     }
 
+    @FindBy(css= ".svg-inline--fa.fa-sign-out-alt.fa-w-16")
+    private WebElement logoutButton;
+
+    public void clickLogoutButton(){
+        logoutButton.click();
+    }
+
     @FindBy(linkText = "dino")
     private WebElement correctName;
 
@@ -65,14 +67,19 @@ public class LoginPage extends BasePage {
         return loginError;
     }
 
-@FindBy (linkText = "Hello guest! ")
+    @FindBy(xpath = "//*[@id='responsive-navbar-nav']/div[2]/span/span/span")
     private WebElement logoutAffirmation;
 
     public WebElement getLogoutAffirmation() {
         return logoutAffirmation;
     }
 
+    @FindBy(css = ".svg-inline--fa.fa-undo.fa-w-16 ")
+    private WebElement refreshPageButton;
 
+    public void clickRefreshPageButton() {
+        refreshPageButton.click();
+    }
 
 
 }
