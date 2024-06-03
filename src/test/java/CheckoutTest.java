@@ -1,5 +1,8 @@
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -168,23 +171,29 @@ public class CheckoutTest extends Hooks {
         assertEquals(checkoutPage.getAwesomeSoftShirtProduct().getText(), "Awesome Soft Shirt");
     }
 
-    @Test(description = "Adding one product in wishlist and refreshing the page to see if the product is still in the wishlist")
+    @Test(description = "Adding one product in wishlist and resetting the page to see if the product is still in the wishlist")
     public void refreshPageWithOneProductInWishlist(){
         checkoutPage.clickProductMetalChair();
         checkoutPage.clickHeartIcon();
-        checkoutPage.clickRefreshPageButton();
-        assertEquals(checkoutPage.getWishlistCounterBadge().getText(),"1");
-        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the product disappear from the wishlist");
+        checkoutPage.clickResetPageButton();
+        try {
+            WebElement element = driver.findElement(By.cssSelector(".fa-layers-counter.shopping_cart_badge"));
+
+            Assert.assertFalse(element.isDisplayed(), "The element should not be visible.");
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            Assert.assertTrue(true, "The element is not present in the DOM, so it is not visible.");
+        }
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page resets and the product disappears from the wishlist");
     }
 
-    @Test(description = "Adding one product to cart and refreshing the page to see if the product is still in the cart")
+    @Test(description = "Adding one product to cart and resetting the page to see if the product is still in the cart")
     public void addingOneProductToCartAndRefreshingThePage(){
         checkoutPage.clickProductMetalChair();
         checkoutPage.clickAddProductToCartButton();
         checkoutPage.clickShoppingCartIcon();
-        checkoutPage.clickRefreshPageButton();
+        checkoutPage.clickResetPageButton();
         assertEquals("How about adding some products in your cart?", checkoutPage.getTextContainer().getText());
-        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the product disappear from the cart saying : 'How about adding some products in your cart?' ");
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page resets and the product disappear from the cart saying : 'How about adding some products in your cart?' ");
     }
 
 

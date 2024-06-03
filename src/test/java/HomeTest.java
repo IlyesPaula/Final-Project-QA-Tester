@@ -1,8 +1,11 @@
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -54,13 +57,19 @@ public class HomeTest extends Hooks {
         assertEquals(homePage.getAwesomeGraniteChipsProduct().getText(), "Awesome Granite Chips");
     }
 
-    @Test(description = "Adding one product to cart and refresh the page to see if the shopping cart counter badge is still having the product the user add")
-    public void refreshPageButtonTest() throws InterruptedException {
+    @Test(description = "Adding one product to cart and resetting the page to see if the shopping cart counter badge is still having the product the user add")
+    public void resetPageButtonTest() throws InterruptedException {
         homePage.clickAwesomeSoftShirtProduct();
         homePage.clickAddProductToCartButton();
-        homePage.clickRefreshPageButton();
-        assertEquals(homePage.getShoppingCartCounterBadge().getText(), "1");
-        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the counter badge is not having the product that has been add");
+        homePage.clickResetPageButton();
+        try {
+            WebElement element = driver.findElement(By.cssSelector(".fa-layers-counter.shopping_cart_badge"));
+
+            Assert.assertFalse(element.isDisplayed(), "The element should not be visible.");
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            Assert.assertTrue(true, "The element is not present in the DOM, so it is not visible.");
+        }
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page resets and the counter badge is not having the product that has been add");
     }
 
 

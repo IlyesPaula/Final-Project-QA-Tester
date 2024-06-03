@@ -259,9 +259,9 @@ public class CheckoutPage extends BasePage {
         return wishlistCounterBadge;
     }
     @FindBy(css = ".svg-inline--fa.fa-undo.fa-w-16 ")
-    private WebElement refreshPageButton;
+    private WebElement resetPageButton;
 
-    public void clickRefreshPageButton() {
-        refreshPageButton.click();
+    public void clickResetPageButton() {
+        resetPageButton.click();
     }
 }

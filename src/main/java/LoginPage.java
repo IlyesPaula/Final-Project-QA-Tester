@@ -75,10 +75,14 @@ public class LoginPage extends BasePage {
     }
 
     @FindBy(css = ".svg-inline--fa.fa-undo.fa-w-16 ")
-    private WebElement refreshPageButton;
+    private WebElement resetPageButton;
 
-    public void clickRefreshPageButton() {
-        refreshPageButton.click();
+    public void clickResetPageButton() {
+        resetPageButton.click();
+    }
+
+    public WebElement resetPageButton(){
+        return resetPageButton;
     }
 
 

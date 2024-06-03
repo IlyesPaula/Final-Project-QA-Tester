@@ -184,10 +184,10 @@ public class HomePage extends BasePage {
 
 
     @FindBy(css = ".svg-inline--fa.fa-undo.fa-w-16 ")
-    private WebElement refreshPageButton;
+    private WebElement resetPageButton;
 
-    public void clickRefreshPageButton() {
-        refreshPageButton.click();
+    public void clickResetPageButton() {
+        resetPageButton.click();
     }
 
     @FindBy(css=".fa-layers-counter.shopping_cart_badge")

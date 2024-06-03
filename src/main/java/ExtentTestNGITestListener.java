@@ -30,7 +30,7 @@ public class ExtentTestNGITestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         System.out.println("Test Started->" + result.getName());
-        test.set(extent.createTest(result.getMethod().getMethodName()));
+        test.set(extent.createTest(result.getMethod().getMethodName(), result.getMethod().getDescription()));
     }
 
     @Override

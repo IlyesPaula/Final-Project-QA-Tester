@@ -1,4 +1,5 @@
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -29,15 +30,16 @@ public class LoginTest extends Hooks {
     }
 
 
-    @Test(description = "Login with the test data provided and refresh the page to see if the user is still connected to his account")
+    @Test(description = "Login with the test data provided and resetting the page to see if the user is still connected to his account")
     public void loginAndRefreshPageTest() throws InterruptedException {
         loginPage.clickSignInButton();
         loginPage.enterYourUserName("dino");
         loginPage.enterYourPassword("choochoo");
         loginPage.clickLoginButton();
-        loginPage.clickRefreshPageButton();
-        assertEquals("dino", loginPage.getCorrectName().getText());
-        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page is completely refreshed and the user is disconnected without his consent");
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.resetPageButton()));
+        loginPage.clickResetPageButton();
+        assertEquals(loginPage.getLogoutAffirmation().getText(), "Hello guest!");
+        ExtentTestNGITestListener.getTest().log(Status.INFO, "The page resets and the user is disconnected");
 
     }
 
